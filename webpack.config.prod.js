@@ -32,10 +32,12 @@ module.exports = {
       },
       {
         test: /\.(svg|png|jpg|gif|eot|ttf|woff|woff2)$/,
-        use: "file-loader?limit=8192&name=/images/[hash:8].[name].[ext]",
+        exclude: /node_modules/,
+        use: "file-loader?limit=8192&name=[path]/[hash:8].[name].[ext]",
       },
       {
         test: /\.(scss|css)$/,
+        exclude: /node_modules/,
         use: ["style-loader", "css-loader", "sass-loader"],
       },
     ],
