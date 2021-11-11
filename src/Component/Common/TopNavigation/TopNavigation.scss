@@ -1,25 +1,46 @@
 #top-navigation {
   width: 100%;
   height: 80px;
-  background: #000051;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
   padding: 0 30px;
+  border-bottom: 1px solid #e5e5e5;
+  background: #fff;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
 
   .inner-container {
     display: flex;
     width: 100%;
-    max-width: 1440px;
+    max-width: 1180px;
     height: 100%;
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
-  }
-  
-  .website-title {
-    text-transform: uppercase;
-    color: #df78ef;
-    font-size: 23px;
-    font-weight: 900;
+
+    .logo {
+      width: 240px;
+      height: 32px;
+      cursor: pointer;
+      background: url(../../../assets/image/logo-desktop.png);
+
+      @media screen and (max-width: 768px) {
+        width: 118px;
+        height: 30px;
+        background: url(../../../assets/image/logo-mobile.png);
+      }
+    }
+
+    ul {
+      display: flex;
+      justify-content: space-between;
+      width: 262px;
+      list-style: none;
+
+      li {
+        cursor: pointer;
+        font-size: 18px;
+        line-height: 26px;
+        color: #646464;
+      }
+    }
   }
 }

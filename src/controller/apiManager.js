@@ -39,11 +39,11 @@ const requestAPI = (path = "", param = {}) => {
 
 export default requestAPI;
 
-export const requesRestaurant = (city, param) => {
-  const restaurantPath = "/Tourism/Restaurant";
+export const requesScenicSpot = (city, param) => {
+  const ScenicSpotPath = "/Tourism/ScenicSpot";
 
   if (!city) {
-    return requestAPI(restaurantPath, param);
+    return requestAPI(ScenicSpotPath, param);
   }
-  return requestAPI(`${restaurantPath}/${city}`, param);
+  return requestAPI(`${ScenicSpotPath}/${city}`, param);
 };

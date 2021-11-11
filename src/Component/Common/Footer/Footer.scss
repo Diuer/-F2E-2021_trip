@@ -1,52 +1,23 @@
 #footer {
   width: 100%;
-  height: 348px;
-  background: #000051;
+  height: 60px;
+  background: #65895F;
   box-shadow: 0px -10px 20px rgba(0, 0, 0, 0.04);
   padding: 0 30px;
   box-sizing: border-box;
 
-  .top,
-  .copyright {
-    display: flex;
-    align-items: center;
-  }
-
-  .top {
-    height: 250px;
-    justify-content: space-between;
-    font-size: 16px;
-    color: #df78ef;
-  }
-
-  .copyright {
-    height: 95px;
-    justify-content: center;
-    font-size: 10px;
-    color: #fff;
-  }
-
   .inner-container {
+    display: flex;
     width: 100%;
     max-width: 1440px;
+    height: 100%;
     margin: 0 auto;
-  }
-  hr {
-    border: 1px solid #df78ef;
-    margin: 0;
-  }
-  
-  .service-container {
-    display: flex;
-    list-style: none;
-    font-size: 16px;
-    color: #df78ef;
-  }
 
-  .website-title {
-    text-transform: uppercase;
-    color: #df78ef;
-    font-size: 50px;
-    font-weight: 900;
+    .copyright {
+      margin: auto;
+      font-size: 14px;
+      font-weight: 400;
+      color: #fff;
+    }
   }
 }
