@@ -17,11 +17,6 @@
     margin: 0 auto;
     box-sizing: border-box;
 
-    @media screen and (max-width: 768px) {
-      flex-direction: column;
-      height: auto;
-    }
-
     .left {
       display: inline-flex;
       flex-direction: column;
@@ -33,6 +28,11 @@
         font-weight: 300;
         color: #1e1e1e;
         margin: 15px 0;
+
+        @media screen and (max-width: 768px) {
+          font-size: 28px;
+          text-align: center;
+        }
       }
 
       .website-title {
@@ -98,6 +98,16 @@
         .icon {
           margin-right: 10px;
         }
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+      height: auto;
+
+      .left,
+      .right {
+        width: 100%;
       }
     }
   }

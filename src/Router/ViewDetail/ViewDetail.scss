@@ -46,7 +46,7 @@
         font-size: 36px;
         font-weight: 300;
         color: #1e1e1e;
-        
+
         @media screen and (max-width: 768px) {
           flex-direction: column;
         }
@@ -90,6 +90,7 @@
         font-size: 18px;
         line-height: 30px;
         font-weight: 300;
+        overflow-wrap: break-word;
       }
 
       .detail-container {
