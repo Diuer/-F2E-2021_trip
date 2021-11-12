@@ -55,6 +55,11 @@
         line-height: 26px;
         color: #646464;
         text-decoration: none;
+
+        &.not-allowed {
+          pointer-events: none;
+          cursor: not-allowed;
+        }
       }
     }
 

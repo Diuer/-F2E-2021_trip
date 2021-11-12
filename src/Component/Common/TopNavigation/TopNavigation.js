@@ -26,8 +26,12 @@ const TopNavigation = () => {
         />
         <ul>
           <Link to="/scenic-spot/search-result">探索景點</Link>
-          <Link to="/">節慶活動</Link>
-          <Link to="/">品嚐美食</Link>
+          <Link className="not-allowed" to="/">
+            節慶活動
+          </Link>
+          <Link className="not-allowed" to="/">
+            品嚐美食
+          </Link>
         </ul>
       </div>
     </div>
