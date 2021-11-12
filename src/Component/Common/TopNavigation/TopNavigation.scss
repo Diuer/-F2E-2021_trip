@@ -7,7 +7,13 @@
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
 
+  @media screen and (max-width: 768px) {
+    height: 64px;
+    border: none;
+  }
+
   .inner-container {
+    position: relative;
     display: flex;
     width: 100%;
     max-width: 1180px;
@@ -23,8 +29,11 @@
       background: url(../../../assets/image/logo-desktop.png);
 
       @media screen and (max-width: 768px) {
+        position: absolute;
         width: 118px;
         height: 30px;
+        left: 50%;
+        transform: translateX(-50%);
         background: url(../../../assets/image/logo-mobile.png);
       }
     }
@@ -35,11 +44,28 @@
       width: 262px;
       list-style: none;
 
+      @media screen and (max-width: 768px) {
+        display: none;
+      }
+
+      a,
       li {
         cursor: pointer;
         font-size: 18px;
         line-height: 26px;
         color: #646464;
+        text-decoration: none;
+      }
+    }
+
+    .menu-icon {
+      position: absolute;
+      display: none;
+      right: 0;
+      cursor: pointer;
+
+      @media screen and (max-width: 768px) {
+        // display: inline-block;
       }
     }
   }

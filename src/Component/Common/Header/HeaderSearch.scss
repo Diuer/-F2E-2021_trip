@@ -26,11 +26,17 @@
       .slogan {
         font-size: 48px;
         font-weight: 300;
+        line-height: 70px;
         color: #1e1e1e;
         margin: 15px 0;
 
+        .highlight {
+          border-bottom: 2px solid #e0da48;
+        }
+
         @media screen and (max-width: 768px) {
           font-size: 28px;
+          line-height: 40px;
           text-align: center;
         }
       }
@@ -41,6 +47,10 @@
         font-size: 20px;
         color: #646464;
         cursor: default;
+
+        @media screen and (max-width: 768px) {
+          margin: 15px 0;
+        }
 
         .icon {
           color: #e0da48;
@@ -94,6 +104,7 @@
         font-weight: 700;
         color: #fff;
         background: #7f977b;
+        cursor: pointer;
 
         .icon {
           margin-right: 10px;

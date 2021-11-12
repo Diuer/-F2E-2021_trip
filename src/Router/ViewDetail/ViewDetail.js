@@ -32,6 +32,7 @@ const ViewDetail = () => {
       data.enCity = Object.keys(CITY_OPTIONS).filter(
         (cityKey) => CITY_OPTIONS[cityKey] === data.City
       );
+      data.Picture.PictureUrl1 = data.Picture.PictureUrl1 || defaultCardPicture;
       data.classLists = [data.Class1, data.Class2, data.Class3];
       data.City = data.City || data.Address.substr(0, 3);
       setViewDetail(data);
@@ -141,7 +142,14 @@ const ViewDetail = () => {
             <div className="recommend-container">
               <p className="title">
                 <span>還有這些不能錯過的景點</span>
-                <span className="more-text" onClick={()=>history.push(`/senic-spot/search-result?searchCity=${ViewDetail.enCity}`)}>
+                <span
+                  className="more-text"
+                  onClick={() =>
+                    history.push(
+                      `/senic-spot/search-result?searchCity=${ViewDetail.enCity}`
+                    )
+                  }
+                >
                   更多{ViewDetail.City}景點
                   <ChevronRightOutlinedIcon className="icon" />
                 </span>

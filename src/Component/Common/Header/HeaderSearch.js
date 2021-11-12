@@ -36,7 +36,7 @@ const HeaderSearch = () => {
       <div className="inner-container">
         <div className="left">
           <p className="slogan">
-            探索台灣
+            探索<span className="highlight">台灣之美</span>
             <br />
             讓我們更親近這片土地
           </p>

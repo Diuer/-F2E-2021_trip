@@ -9,6 +9,10 @@
   padding: 0 30px;
   box-sizing: border-box;
 
+  @media screen and (max-width: 768px) {
+    height: auto;
+  }
+
   .inner-container {
     position: relative;
     display: flex;
@@ -33,6 +37,10 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+
+      @media screen and (max-width: 768px) {
+        font-size: 16px;
+      }
     }
 
     .slider {
@@ -40,6 +48,10 @@
       height: 400px;
       object-fit: cover;
       border-radius: 24px;
+
+      @media screen and (max-width: 768px) {
+        height: calc((100vw + 0px) / 1.86);
+      }
 
       &.link {
         cursor: pointer;
@@ -55,7 +67,9 @@
       display: flex;
       align-items: center;
       right: 49px;
+      right: 8%;
       bottom: 25px;
+      bottom: 3%;
 
       .slider-dot {
         color: #c4c4c4;
