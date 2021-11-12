@@ -7,20 +7,21 @@ import SearchIcon from "@mui/icons-material/Search";
 import ChevronRightOutlinedIcon from "@mui/icons-material/ChevronRightOutlined";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import defaultCardPicture from "../../assets/image/default-card-picture.png";
-import noDataIcon from "../../assets/image/no-data.png";
 
 import { CITY_OPTIONS } from "../../constants/city";
 import requestAPI, { requesScenicSpot } from "../../controller/apiManager";
 import { Slider } from "../../Component/Common/Slider";
 
 import "./ViewDetail.scss";
+import { Breadcrumb } from "../../Component/Common/Breadcrumb";
 
 const ViewDetail = () => {
   const { searchKind = "scenic-spot", id } = useParams();
   const history = useHistory();
   const loc = useLocation();
-  const [ViewDetail, setViewDetail] = useState(false);
+  const [viewDetail, setViewDetail] = useState(false);
   const [recommendList, setRecommendList] = useState([]);
+  const [otherList, setOtherList] = useState([]);
 
   useEffect(async () => {
     if (searchKind === "scenic-spot") {
@@ -40,16 +41,24 @@ const ViewDetail = () => {
       /* 取得該景點周遭資訊 */
       const nearby = await requesScenicSpot("", {
         $spatialFilter: `nearby(${data.Position.PositionLat},${data.Position.PositionLon},5000)`,
+        $filter: "Picture/PictureUrl1 ne null",
         $format: "JSON",
         $top: 4,
       });
       setRecommendList(nearby);
+
+      /* 取得該縣市其他景點資訊 */
+      const other = await requesScenicSpot(data.enCity, {
+        $filter: "Picture/PictureUrl1 ne null",
+        $orderby: "ID desc",
+        $format: "JSON",
+        $skip: Math.floor(Math.random() * (100 - 4 + 1) + 4),
+        $top: 4,
+      });
+      setOtherList(other);
     }
   }, [loc]);
 
-  console.log(recommendList);
-
-  const Separator = () => <span className="separator">/</span>;
   const ClassTag = ({ value }) => <span className="class-tag"># {value}</span>;
   const DetailInfoRow = ({ title, description }) =>
     description ? (
@@ -95,43 +104,27 @@ const ViewDetail = () => {
     <>
       <div className="search-result">
         <div className="inner-container">
-          <div className="breadcrumb">
-            <Link to="/">首頁</Link>
-            <Separator />
-            <Link to="/scenic-spot/search-result">探索景點</Link>
-            <Separator />
-            {ViewDetail.City && (
-              <>
-                <Link
-                  to={`/scenic-spot/search-result?searchCity=${ViewDetail.enCity}`}
-                >
-                  {ViewDetail.City}
-                </Link>
-                <Separator />
-              </>
-            )}
-            {ViewDetail.Name}
-          </div>
-          <Slider sliderData={!ViewDetail || [ViewDetail]} />
+          <Breadcrumb data={viewDetail} />
+          <Slider sliderData={!viewDetail || [viewDetail]} />
           <div className="info-container">
-            <p className="title">{ViewDetail.Name}</p>
+            <p className="title">{viewDetail.Name}</p>
             <div className="class-tag-container">
-              {ViewDetail &&
-                ViewDetail.classLists.map((item) =>
+              {viewDetail &&
+                viewDetail.classLists.map((item) =>
                   item ? <ClassTag key={item} value={item} /> : null
                 )}
             </div>
             <p className="info-title">景點介紹</p>
-            <p className="info-description">{ViewDetail.DescriptionDetail}</p>
+            <p className="info-description">{viewDetail.DescriptionDetail}</p>
             <div className="detail-container">
-              <DetailInfo data={ViewDetail} />
+              <DetailInfo data={viewDetail} />
               <div className="detail-direction">
                 <div className="map">
                   <iframe
                     width="100%"
                     height="250"
                     loading="lazy"
-                    src={`https://maps.google.com/maps?q=${ViewDetail.Name}&hl=zh-TW&z=16&output=embed`}
+                    src={`https://maps.google.com/maps?q=${viewDetail.Name}&hl=zh-TW&z=16&output=embed`}
                     data-v-7c9f8033=""
                   ></iframe>
                 </div>
@@ -139,6 +132,29 @@ const ViewDetail = () => {
             </div>
           </div>
           {recommendList.length > 0 && (
+            <div className="recommend-container">
+              <p className="title">
+                <span>附近景點</span>
+              </p>
+              <div className="card-container">
+                {recommendList.map((data) => (
+                  <div
+                    className="card"
+                    key={data.ID}
+                    onClick={() => history.push(`/scenic-spot/view/${data.ID}`)}
+                  >
+                    <img src={data.Picture.PictureUrl1 || defaultCardPicture} />
+                    <p className="title">{data.Name}</p>
+                    <div className="city-info">
+                      <LocationOnOutlinedIcon className="icon" />
+                      <span>{data.Address || data.City}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          {otherList.length > 0 && (
             <div className="recommend-container">
               <p className="title">
                 <span>還有這些不能錯過的景點</span>
@@ -150,12 +166,12 @@ const ViewDetail = () => {
                     )
                   }
                 >
-                  更多{ViewDetail.City}景點
+                  更多{viewDetail.City}景點
                   <ChevronRightOutlinedIcon className="icon" />
                 </span>
               </p>
               <div className="card-container">
-                {recommendList.map((data) => (
+                {otherList.map((data) => (
                   <div
                     className="card"
                     key={data.ID}

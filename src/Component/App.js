@@ -21,18 +21,6 @@ import SearchResult from "../Router/SearchResult/index";
 import ViewDetail from "../Router/ViewDetail/index";
 
 const App = () => {
-  useLayoutEffect(() => {
-    // if ("geolocation" in navigator) {
-    //   navigator.geolocation.getCurrentPosition(async ({ coords }) => {
-    //     console.log(coords, coords.longitude, coords.latitude);
-    //     const nearby = await requesScenicSpot("", {
-    //       $spatialFilter: `nearby(${coords.latitude},${coords.longitude},5000)`,
-    //     });
-    //     console.log("nearby me", nearby);
-    //   });
-    // }
-  }, []);
-
   return (
     <>
       <Router basename="/F2E-2021_trip">

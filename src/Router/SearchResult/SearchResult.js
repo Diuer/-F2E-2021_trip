@@ -12,6 +12,7 @@ import { CITY_OPTIONS } from "../../constants/city";
 import requestAPI, { requesScenicSpot } from "../../controller/apiManager";
 
 import "./SearchResult.scss";
+import { Separator } from "../../Component/Common/Breadcrumb";
 
 const SearchResult = () => {
   const history = useHistory();
@@ -24,14 +25,17 @@ const SearchResult = () => {
     qs.parse(loc.search).searchKeyword || ""
   );
   const [searchResult, setSearchResult] = useState([]);
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(async () => {
-    console.log(loc.search, qs.parse(loc.search.substring(1)));
     if (searchKind === "scenic-spot") {
+      setLoading(true);
       const data = await requesScenicSpot(searchCity, {
         $filter: `contains(Name,'${searchKeyword}')`,
+        $top: 20,
       });
       setSearchResult(data);
+      setLoading(false);
     }
   }, [loc]);
 
@@ -47,9 +51,12 @@ const SearchResult = () => {
   return (
     <>
       <div className="search-result">
+        {isLoading && <div className="mask"></div>}
         <div className="inner-container">
           <div className="breadcrumb">
-            <Link to="/">首頁</Link> / 探索景點
+            <Link to="/">首頁</Link>
+            <Separator />
+            探索景點
           </div>
           <div className="search-bar">
             <select
@@ -57,7 +64,7 @@ const SearchResult = () => {
               value={searchCity}
               onChange={(e) => setSearchCity(e.target.value)}
             >
-              <option value="">全部</option>
+              <option value="">全部縣市</option>
               {Object.keys(CITY_OPTIONS).map((cityKey) => (
                 <option key={cityKey} value={cityKey}>
                   {CITY_OPTIONS[cityKey]}
@@ -79,11 +86,11 @@ const SearchResult = () => {
             <p className="result-text">
               搜尋結果{" "}
               <span>
-                共有<code>{searchResult.length}</code>筆
+                目前顯示<code>{searchResult.length}</code>筆
               </span>
             </p>
             <div className="card-container">
-              {searchResult.length > 0 ? (
+              {searchResult.length > 0 &&
                 searchResult.map((data) => (
                   <div
                     className="card"
@@ -97,8 +104,8 @@ const SearchResult = () => {
                       <span>{data.Address || data.City}</span>
                     </div>
                   </div>
-                ))
-              ) : (
+                ))}
+              {!isLoading && !searchResult.length && (
                 <div className="no-data-container">
                   <img className="icon" src={noDataIcon} />
                   <p className="no-data-text">
