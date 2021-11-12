@@ -51,7 +51,7 @@ const Homepage = () => {
     <>
       <HeaderSearch />
       {sliderData && <Slider sliderData={sliderData} needRedirect />}
-      <div className="inner-container">
+      <div className="homepage-container inner-container">
         {hotList.length > 0 && (
           <div className="hot-container">
             <p className="title">

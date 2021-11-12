@@ -1,4 +1,4 @@
-.inner-container {
+.homepage-container.inner-container {
   // display: flex;
   // justify-content: space-between;
   // align-items: center;
@@ -7,6 +7,11 @@
   height: 100%;
   margin: 0 auto;
   box-sizing: border-box;
+  padding: 0;
+
+  @media screen and (max-width: 1180px) {
+    padding: 0 30px;
+  }
 }
 
 .hot-container {
