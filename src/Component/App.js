@@ -20,15 +20,18 @@ import Homepage from "../Router/Homepage/index";
 import SearchResult from "../Router/SearchResult/index";
 import ViewDetail from "../Router/ViewDetail/index";
 
+export const basename = process.env.isProd ? "/F2E-2021_trip" : "/";
+console.log(basename);
+
 const App = () => {
   return (
     <>
-      <Router basename="/F2E-2021_trip">
+      <Router basename={basename}>
         <TopNavigation />
         <Switch>
           <Route exact path="/" component={Homepage} />
-          <Route path="/:searchKind/search-result" component={SearchResult} />
-          <Route path="/:searchKind/view/:id" component={ViewDetail} />
+          <Route path={`/:searchKind/search-result`} component={SearchResult} />
+          <Route path={`/:searchKind/view/:id`} component={ViewDetail} />
         </Switch>
         <Footer />
       </Router>

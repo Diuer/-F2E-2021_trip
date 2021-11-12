@@ -26,6 +26,11 @@ module.exports = {
       template: "./index-template.html",
       filename: "index.html",
     }),
+    new webpack.DefinePlugin({
+      "process.env": {
+        isProd: false,
+      },
+    }),
   ],
   module: {
     rules: [
